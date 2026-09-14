@@ -1,0 +1,90 @@
+{
+  "entities": {
+    "ThemeConfig": {
+      "title": "ThemeConfig",
+      "description": "Storefront theme settings and customizable section structure",
+      "type": "object",
+      "properties": {
+        "themePreset": { "type": "string", "description": "Active preset: minimal, fashion, or modern" },
+        "primaryColor": { "type": "string", "description": "Primary brand color" },
+        "backgroundColor": { "type": "string", "description": "Storefront background color" },
+        "accentColor": { "type": "string", "description": "Accent color for buttons and highlights" },
+        "fontFamily": { "type": "string", "description": "Typography family preset" },
+        "buttonStyle": { "type": "string", "description": "Button radius style: sharp, pill, soft" },
+        "sections": { "type": "string", "description": "Serialized JSON array of homepage sections and their configurations" },
+        "updatedAt": { "type": "string", "description": "ISO timestamp of last update" }
+      },
+      "required": ["themePreset", "primaryColor", "backgroundColor", "sections"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Store product catalog item",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "Product display name" },
+        "subtitle": { "type": "string", "description": "Product subtitle or material description" },
+        "description": { "type": "string", "description": "Detailed product description" },
+        "price": { "type": "number", "description": "Retail price in USD" },
+        "compareAtPrice": { "type": "number", "description": "Original comparison price if discounted" },
+        "category": { "type": "string", "description": "Product collection category" },
+        "image": { "type": "string", "description": "Main product image URL" },
+        "additionalImages": { "type": "string", "description": "Serialized JSON list of secondary images" },
+        "inventory": { "type": "number", "description": "Available stock quantity" },
+        "isSignature": { "type": "boolean", "description": "Whether displayed on signature pieces grid" },
+        "specs": { "type": "string", "description": "Key specifications summary" }
+      },
+      "required": ["title", "price", "category", "inventory"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer purchase order",
+      "type": "object",
+      "properties": {
+        "orderNumber": { "type": "string", "description": "Order reference code (e.g., MNV-1001)" },
+        "customerEmail": { "type": "string", "description": "Buyer email address" },
+        "customerName": { "type": "string", "description": "Buyer full name" },
+        "items": { "type": "string", "description": "Serialized JSON array of purchased items" },
+        "subtotal": { "type": "number", "description": "Order subtotal" },
+        "discountCode": { "type": "string", "description": "Applied promo code" },
+        "discountAmount": { "type": "number", "description": "Discount deduction" },
+        "total": { "type": "number", "description": "Grand total paid" },
+        "status": { "type": "string", "description": "Order status: Paid, Unfulfilled, Fulfilled, Shipped" },
+        "createdAt": { "type": "string", "description": "Order creation date" },
+        "shippingAddress": { "type": "string", "description": "Serialized customer address" }
+      },
+      "required": ["orderNumber", "customerEmail", "total", "status"]
+    },
+    "Discount": {
+      "title": "Discount",
+      "description": "Store discount coupons and promo codes",
+      "type": "object",
+      "properties": {
+        "code": { "type": "string", "description": "Discount coupon code" },
+        "percentage": { "type": "number", "description": "Percentage deduction (0-100)" },
+        "fixedAmount": { "type": "number", "description": "Fixed deduction in USD" },
+        "type": { "type": "string", "description": "percentage or fixed" },
+        "isActive": { "type": "boolean", "description": "Whether coupon is active" },
+        "usageCount": { "type": "number", "description": "Number of times redeemed" }
+      },
+      "required": ["code", "isActive"]
+    }
+  },
+  "firestore": {
+    "/store_settings/{settingId}": {
+      "schema": "ThemeConfig",
+      "description": "Global storefront theme and layout configuration"
+    },
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Collection of e-commerce products"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Customer purchase orders"
+    },
+    "/discounts/{discountId}": {
+      "schema": "Discount",
+      "description": "Store discount codes"
+    }
+  }
+}

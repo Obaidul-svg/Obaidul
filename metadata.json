@@ -1,0 +1,6 @@
+{
+  "name": "MANOVA — Premium Bangladeshi Watches",
+  "description": "Premium luxury Bangladeshi watch e-commerce platform with customer storefront and merchant admin dashboard. Features BDT pricing, bKash/Nagad/COD checkout, inventory and order management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
